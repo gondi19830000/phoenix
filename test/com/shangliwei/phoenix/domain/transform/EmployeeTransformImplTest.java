@@ -1,5 +1,6 @@
 package com.shangliwei.phoenix.domain.transform;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 
 import org.junit.After;
@@ -22,13 +23,13 @@ public class EmployeeTransformImplTest {
 	public void setUp() throws Exception {
 		po = new EmployeePo();
 		po.setId(SequenceUtil.getUUID());
-		po.setSequence(1);
+		po.setSequence(new BigDecimal("1"));
 		po.setEmail("shangliwei@phoenix.com");
 		po.setPhone("13700000000");
 		po.setState("01");
 		po.setDepartmentId("101100");
 		po.setCreater("admin");
-		po.setCreattime(DateTimeUtil.getTimestamp());
+//		po.setCreattime(DateTimeUtil.getTimestamp());
 		transform = new EmployeeTransformImpl();
 		connection = DBUtil.getConnection();
 	}

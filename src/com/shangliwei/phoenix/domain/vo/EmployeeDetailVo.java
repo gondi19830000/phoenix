@@ -3,7 +3,7 @@ package com.shangliwei.phoenix.domain.vo;
 public class EmployeeDetailVo {
 
 	private String id;
-	private int sequence;
+	private String sequence;
 	private String username;
 	private String password;
 	private String email;
@@ -29,11 +29,11 @@ public class EmployeeDetailVo {
 		this.id = id;
 	}
 
-	public int getSequence() {
+	public String getSequence() {
 		return sequence;
 	}
 
-	public void setSequence(int sequence) {
+	public void setSequence(String sequence) {
 		this.sequence = sequence;
 	}
 

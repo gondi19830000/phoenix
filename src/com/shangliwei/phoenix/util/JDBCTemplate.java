@@ -66,11 +66,11 @@ public abstract class JDBCTemplate {
 				}
 				result.add(map);
 			}
+			if (result.size() == 0) {
+				result = null;
+			}
 		} finally {
 			DBUtil.release(preparedStatement, resultSet);
-		}
-		if (result.size() == 0) {
-			result = null;
 		}
 		return result;
 	}

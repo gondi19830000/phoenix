@@ -1,8 +1,8 @@
 package com.shangliwei.phoenix.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +12,13 @@ import com.shangliwei.phoenix.dao.IDao;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
 
+import oracle.sql.TIMESTAMP;
+
 public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 
 	@Override
 	public void add(EmployeePo po, Connection connection) throws SQLException {
-		String sql = "INSERT INTO S_T_EMPLOYEE(ID,SEQUENCE,USERNAME,PASSWORD,EMAIL,PHONE,STATE,DEPARTMENT_ID,CREATER,CREATTIME) VALUES(?,?,?,?,?,?,?,?,,?,?)";
+		String sql = "INSERT INTO S_T_EMPLOYEE(ID,SEQUENCE,USERNAME,PASSWORD,EMAIL,PHONE,STATE,DEPARTMENT_ID,CREATER,CREATTIME) VALUES(?,?,?,?,?,?,?,?,?,?)";
 		List<Object> parameters = new ArrayList<>();
 		parameters.add(po.getId());
 		parameters.add(po.getSequence());
@@ -107,20 +109,20 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 		return poList;
 	}
 	
-	private EmployeePo toPo(Map<String, Object> result) {
+	private EmployeePo toPo(Map<String, Object> result) throws SQLException {
 		EmployeePo po = new EmployeePo();
-		po.setId((String) result.get("id"));
-		po.setSequence((int) result.get("sequence"));
-		po.setUsername((String) result.get("username"));
-		po.setPassword((String) result.get("password"));
-		po.setEmail((String) result.get("email"));
-		po.setPhone((String) result.get("phone"));
-		po.setState((String) result.get("state"));
-		po.setDepartmentId((String) result.get("department_id"));
-		po.setCreater((String) result.get("creater"));
-		po.setCreattime((Timestamp) result.get("creattime"));
-		po.setEditer((String) result.get("editer"));
-		po.setEdittime((Timestamp) result.get("edittime"));
+		po.setId((String) result.get("ID"));
+		po.setSequence((BigDecimal) result.get("SEQUENCE"));
+		po.setUsername((String) result.get("USERNAME"));
+		po.setPassword((String) result.get("PASSWORD"));
+		po.setEmail((String) result.get("EMAIL"));
+		po.setPhone((String) result.get("PHONE"));
+		po.setState((String) result.get("STATE"));
+		po.setDepartmentId((String) result.get("DEPARTMENT_ID"));
+		po.setCreater((String) result.get("CREATER"));
+		po.setCreattime((TIMESTAMP) result.get("CREATTIME"));
+		po.setEditer((String) result.get("EDITER"));
+		po.setEdittime((TIMESTAMP) result.get("EDITTIME"));
 		return po;
 	}
 

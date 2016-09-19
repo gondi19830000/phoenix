@@ -27,7 +27,7 @@ public class EmployeeTransformImpl implements ITransform<EmployeePo> {
 	public EmployeeDetailVo toDetailVo(EmployeePo po, Connection connection) {
 		EmployeeDetailVo vo = new EmployeeDetailVo();
 		vo.setId(po.getId());
-		vo.setSequence(po.getSequence());
+		vo.setSequence(String.valueOf(po.getSequence()));
 		vo.setUsername(po.getUsername());
 		vo.setPassword(po.getPassword());
 		vo.setEmail(po.getEmail());
