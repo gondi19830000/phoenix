@@ -19,7 +19,7 @@ public abstract class JDBCTemplate {
 			for (int i=0; i<parameters.size(); i++) {
 				preparedStatement.setObject(i+1, parameters.get(i));
 			}
-			Logger.print("Execute SQL:" + sql, Logger.LEVEL_DEBUG);
+			this.loggerSQLAndParametersMessage(sql, parameters);
 			preparedStatement.executeUpdate();			
 		} finally {
 			DBUtil.release(preparedStatement);
@@ -51,10 +51,12 @@ public abstract class JDBCTemplate {
 		List<Map<String, Object>> result = new ArrayList<>();
 		try {
 			preparedStatement = connection.prepareStatement(sql);
-			for (int i=0; i<parameters.size(); i++) {
-				preparedStatement.setObject(i+1, parameters.get(i));
+			if (parameters != null) {
+				for (int i=0; i<parameters.size(); i++) {
+					preparedStatement.setObject(i+1, parameters.get(i));
+				}				
 			}
-			Logger.print("Execute SQL:" + sql, Logger.LEVEL_DEBUG);
+			this.loggerSQLAndParametersMessage(sql, parameters);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Map<String, Object> map = new HashMap<>();
@@ -62,7 +64,6 @@ public abstract class JDBCTemplate {
 				int columnCount = metaData.getColumnCount();
 				for (int i=0; i<columnCount; i++) {
 					String column = metaData.getColumnName(i+1);
-					/*map.put(column, resultSet.getObject(column));*/
 					map.put(column, TypeCaseUtil.oracleToJava(resultSet.getObject(column)));
 				}
 				result.add(map);
@@ -74,5 +75,24 @@ public abstract class JDBCTemplate {
 			DBUtil.release(preparedStatement, resultSet);
 		}
 		return result;
+	}
+	
+	private String getParametersMessage(List<Object> parameters) {
+		String result = "";
+		if (parameters != null) {
+			for (int i=0; i<parameters.size(); i++) {
+				result += (parameters.get(i) + ",");
+			}
+			result = result.substring(0, result.length()-1);
+		}
+		return result;
+	}
+	
+	private void loggerSQLAndParametersMessage(String sql, List<Object> parameters) {
+		Logger.print("Execute SQL:" + sql, Logger.LEVEL_DEBUG);
+		String parametersMessage = this.getParametersMessage(parameters);
+		if (parametersMessage != null && !"".equals(parametersMessage)) {
+			Logger.print("Execute Parameters:" + parametersMessage, Logger.LEVEL_DEBUG);
+		}
 	}
 }

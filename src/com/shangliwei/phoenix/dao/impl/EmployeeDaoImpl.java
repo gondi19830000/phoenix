@@ -8,11 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.shangliwei.phoenix.dao.IDao;
+import com.shangliwei.phoenix.dao.IEmployeeDao;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
 
-public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
+public class EmployeeDaoImpl extends JDBCTemplate implements IEmployeeDao {
 
 	@Override
 	public void add(EmployeePo po, Connection connection) throws SQLException {
@@ -72,24 +72,24 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 		sql.append("SELECT * FROM S_T_EMPLOYEE WHERE 1=1 ");
 		if (condition != null && condition.size()>0) {
 			if (condition.get("username") != null && !"".equals(condition.get("username"))) {
-				sql.append("AND USERNAME LIKE '%?%' ");
-				parameters.add(condition.get("username"));
+				sql.append("AND USERNAME LIKE ? ");
+				parameters.add("%" + condition.get("username") + "%");
 			}
 			if (condition.get("email") != null && !"".equals(condition.get("email"))) {
-				sql.append("AND EMAIL LIKE '%?%' ");
-				parameters.add(condition.get("email"));
+				sql.append("AND EMAIL LIKE ? ");
+				parameters.add("%" + condition.get("email") + "%");
 			}
 			if (condition.get("phone") != null && !"".equals(condition.get("phone"))) {
-				sql.append("AND PHONE LIKE '%?%' ");
-				parameters.add(condition.get("phone"));
+				sql.append("AND PHONE LIKE ? ");
+				parameters.add("%" + condition.get("phone") + "%");
 			}
 			if (condition.get("state") != null && !"".equals(condition.get("state"))) {
 				sql.append("AND STATE=? ");
 				parameters.add(condition.get("state"));
 			}
 			if (condition.get("departmentId") != null && !"".equals(condition.get("departmentId"))) {
-				sql.append("AND DEPARTMENT_ID LIKE '%?%' ");
-				parameters.add(condition.get("departmentId"));
+				sql.append("AND DEPARTMENT_ID LIKE ? ");
+				parameters.add("%" + condition.get("departmentId") + "%");
 			}
 			if (beginRow>0 && endRow>0) {
 				sql.append("ROWNUM BETWEEN ? AND ? ");
@@ -122,6 +122,17 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 		po.setEditer((String) result.get("EDITER"));
 		po.setEdittime((Timestamp) result.get("EDITTIME"));
 		return po;
+	}
+	
+	@Override
+	public int getMaxSequence(Connection connection) throws SQLException {
+		int maxSequence = 0;
+		String sql = "SELECT MAX(SEQUENCE) MAXSEQUENCE FROM S_T_EMPLOYEE";
+		Map<String, Object> result = this.executeOne(sql, null, connection);
+		if (result.get("MAXSEQUENCE") != null) {
+			maxSequence = (int) result.get("MAXSEQUENCE");
+		}
+		return maxSequence;
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.shangliwei.phoenix.dao;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import com.shangliwei.phoenix.util.SequenceUtil;
 public class EmployeeDaoImplTest {
 
 	private Connection connection;
-	private IDao<EmployeePo> dao;
+	private IEmployeeDao dao;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -35,10 +35,10 @@ public class EmployeeDaoImplTest {
 	public void testAdd() throws SQLException {
 		EmployeePo po = new EmployeePo();
 		po.setId(SequenceUtil.getUUID());
-		po.setSequence(1);
-		po.setUsername("shangliwei");
+		po.setSequence(18);
+		po.setUsername("sunxiaomei");
 		po.setPassword("123456");
-		po.setEmail("shangliwei@icloud.com");
+		po.setEmail("sunxiaomei@icloud.com");
 		po.setPhone("13700000000");
 		po.setState("01");
 		po.setDepartmentId("18500");
@@ -48,8 +48,12 @@ public class EmployeeDaoImplTest {
 	}
 
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testUpdate() throws SQLException {
+		EmployeePo po = dao.query("c2f39a1947ca419a8d0c351730501fb2", connection);
+		po.setState("02");
+		po.setEditer("admin");
+		po.setEdittime(DateTimeUtil.getTimestamp());
+		dao.update(po, connection);
 	}
 
 	@Test
@@ -63,8 +67,15 @@ public class EmployeeDaoImplTest {
 	}
 
 	@Test
-	public void testQueryMapOfStringObjectIntIntConnection() {
-		fail("Not yet implemented");
+	public void testQueryMapOfStringObjectIntIntConnection() throws SQLException {
+		Map<String, Object> condition = new HashMap<>();
+		condition.put("username", "shangliwei");
+		System.out.println(dao.query(condition, 0, 0, connection));
+	}
+	
+	@Test
+	public void testGetMaxSequence() throws SQLException {
+		System.out.println(dao.getMaxSequence(connection));
 	}
 
 }
