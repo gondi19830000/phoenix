@@ -1,6 +1,5 @@
 package com.shangliwei.phoenix.domain.transform;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 
 import org.junit.After;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.domain.transform.impl.EmployeeTransformImpl;
 import com.shangliwei.phoenix.util.DBUtil;
-import com.shangliwei.phoenix.util.DateTimeUtil;
 import com.shangliwei.phoenix.util.SequenceUtil;
 
 public class EmployeeTransformImplTest {
@@ -23,7 +21,7 @@ public class EmployeeTransformImplTest {
 	public void setUp() throws Exception {
 		po = new EmployeePo();
 		po.setId(SequenceUtil.getUUID());
-		po.setSequence(new BigDecimal("1"));
+		po.setSequence(1);
 		po.setEmail("shangliwei@phoenix.com");
 		po.setPhone("13700000000");
 		po.setState("01");

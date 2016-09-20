@@ -1,8 +1,8 @@
 package com.shangliwei.phoenix.dao.impl;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,8 +11,6 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IDao;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
-
-import oracle.sql.TIMESTAMP;
 
 public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 
@@ -112,7 +110,7 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 	private EmployeePo toPo(Map<String, Object> result) throws SQLException {
 		EmployeePo po = new EmployeePo();
 		po.setId((String) result.get("ID"));
-		po.setSequence((BigDecimal) result.get("SEQUENCE"));
+		po.setSequence((int) result.get("SEQUENCE"));
 		po.setUsername((String) result.get("USERNAME"));
 		po.setPassword((String) result.get("PASSWORD"));
 		po.setEmail((String) result.get("EMAIL"));
@@ -120,9 +118,9 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IDao<EmployeePo> {
 		po.setState((String) result.get("STATE"));
 		po.setDepartmentId((String) result.get("DEPARTMENT_ID"));
 		po.setCreater((String) result.get("CREATER"));
-		po.setCreattime((TIMESTAMP) result.get("CREATTIME"));
+		po.setCreattime((Timestamp) result.get("CREATTIME"));
 		po.setEditer((String) result.get("EDITER"));
-		po.setEdittime((TIMESTAMP) result.get("EDITTIME"));
+		po.setEdittime((Timestamp) result.get("EDITTIME"));
 		return po;
 	}
 

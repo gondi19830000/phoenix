@@ -62,7 +62,8 @@ public abstract class JDBCTemplate {
 				int columnCount = metaData.getColumnCount();
 				for (int i=0; i<columnCount; i++) {
 					String column = metaData.getColumnName(i+1);
-					map.put(column, resultSet.getObject(column));
+					/*map.put(column, resultSet.getObject(column));*/
+					map.put(column, TypeCaseUtil.oracleToJava(resultSet.getObject(column)));
 				}
 				result.add(map);
 			}

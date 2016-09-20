@@ -2,7 +2,6 @@ package com.shangliwei.phoenix.dao;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -13,6 +12,7 @@ import org.junit.Test;
 import com.shangliwei.phoenix.dao.impl.EmployeeDaoImpl;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.util.DBUtil;
+import com.shangliwei.phoenix.util.DateTimeUtil;
 import com.shangliwei.phoenix.util.SequenceUtil;
 
 public class EmployeeDaoImplTest {
@@ -35,7 +35,7 @@ public class EmployeeDaoImplTest {
 	public void testAdd() throws SQLException {
 		EmployeePo po = new EmployeePo();
 		po.setId(SequenceUtil.getUUID());
-		po.setSequence(new BigDecimal("1"));
+		po.setSequence(1);
 		po.setUsername("shangliwei");
 		po.setPassword("123456");
 		po.setEmail("shangliwei@icloud.com");
@@ -43,7 +43,7 @@ public class EmployeeDaoImplTest {
 		po.setState("01");
 		po.setDepartmentId("18500");
 		po.setCreater("admin");
-		//po.setCreattime(DateTimeUtil.getTimestamp());
+		po.setCreattime(DateTimeUtil.getTimestamp());
 		dao.add(po, connection);
 	}
 
@@ -59,7 +59,7 @@ public class EmployeeDaoImplTest {
 
 	@Test
 	public void testQueryStringConnection() throws SQLException {
-		System.out.println(dao.query("131a4f6b10874bf3a9c6d97f3f332367", connection));
+		System.out.println(dao.query("c2f39a1947ca419a8d0c351730501fb2", connection));
 	}
 
 	@Test

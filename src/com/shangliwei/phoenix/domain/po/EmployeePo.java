@@ -1,13 +1,11 @@
 package com.shangliwei.phoenix.domain.po;
 
-import java.math.BigDecimal;
-
-import oracle.sql.TIMESTAMP;
+import java.sql.Timestamp;
 
 public class EmployeePo {
 
 	private String id;
-	private BigDecimal sequence;
+	private int sequence;
 	private String username;
 	private String password;
 	private String email;
@@ -16,9 +14,9 @@ public class EmployeePo {
 	private String departmentId;
 
 	private String creater;
-	private TIMESTAMP creattime;
+	private Timestamp creattime;
 	private String editer;
-	private TIMESTAMP edittime;
+	private Timestamp edittime;
 
 	public String getId() {
 		return id;
@@ -28,11 +26,11 @@ public class EmployeePo {
 		this.id = id;
 	}
 
-	public BigDecimal getSequence() {
+	public int getSequence() {
 		return sequence;
 	}
 
-	public void setSequence(BigDecimal sequence) {
+	public void setSequence(int sequence) {
 		this.sequence = sequence;
 	}
 
@@ -84,11 +82,11 @@ public class EmployeePo {
 		this.creater = creater;
 	}
 
-	public TIMESTAMP getCreattime() {
+	public Timestamp getCreattime() {
 		return creattime;
 	}
 
-	public void setCreattime(TIMESTAMP creattime) {
+	public void setCreattime(Timestamp creattime) {
 		this.creattime = creattime;
 	}
 
@@ -100,11 +98,11 @@ public class EmployeePo {
 		this.editer = editer;
 	}
 
-	public TIMESTAMP getEdittime() {
+	public Timestamp getEdittime() {
 		return edittime;
 	}
 
-	public void setEdittime(TIMESTAMP edittime) {
+	public void setEdittime(Timestamp edittime) {
 		this.edittime = edittime;
 	}
 
