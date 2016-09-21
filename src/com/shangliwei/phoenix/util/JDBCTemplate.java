@@ -79,7 +79,7 @@ public abstract class JDBCTemplate {
 	
 	private String getParametersMessage(List<Object> parameters) {
 		String result = "";
-		if (parameters != null) {
+		if (parameters != null && parameters.size() > 0) {
 			for (int i=0; i<parameters.size(); i++) {
 				result += (parameters.get(i) + ",");
 			}

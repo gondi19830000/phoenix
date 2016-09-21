@@ -5,13 +5,13 @@ import java.sql.Connection;
 import com.shangliwei.phoenix.dao.impl.DepartmentDaoImpl;
 import com.shangliwei.phoenix.domain.bo.EmployeeBo;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
-import com.shangliwei.phoenix.domain.transform.ITransform;
+import com.shangliwei.phoenix.domain.transform.IEmployeeTransform;
 import com.shangliwei.phoenix.domain.vo.EmployeeDetailVo;
 import com.shangliwei.phoenix.domain.vo.EmployeeListVo;
 import com.shangliwei.phoenix.domain.vo.EmployeePopVo;
 import com.shangliwei.phoenix.util.CacheUtil;
 
-public class EmployeeTransformImpl implements ITransform<EmployeePo> {
+public class EmployeeTransformImpl implements IEmployeeTransform {
 
 	@Override
 	public EmployeeBo toBo(EmployeePo po, Connection connection) {
@@ -31,9 +31,9 @@ public class EmployeeTransformImpl implements ITransform<EmployeePo> {
 		vo.setUsername(po.getUsername());
 		vo.setPassword(po.getPassword());
 		vo.setEmail(po.getEmail());
-		vo.setPhone(vo.getPhone());
+		vo.setPhone(po.getPhone());
 		vo.setState(po.getState());
-		vo.setDepartmentId(vo.getDepartmentId());
+		vo.setDepartmentId(po.getDepartmentId());
 		vo.setCreater(po.getCreater());
 		vo.setEditer(po.getEditer());
 		vo.setStateName(CacheUtil.getDictionaryName(po.getState(), "EMPLOYEE_STATE", connection));
