@@ -1,6 +1,7 @@
 package com.shangliwei.phoenix.domain.transform.impl;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.shangliwei.phoenix.dao.impl.DepartmentDaoImpl;
 import com.shangliwei.phoenix.domain.bo.EmployeeBo;
@@ -14,11 +15,8 @@ import com.shangliwei.phoenix.util.CacheUtil;
 public class EmployeeTransformImpl implements IEmployeeTransform {
 
 	@Override
-	public EmployeeBo toBo(EmployeePo po, Connection connection) {
+	public EmployeeBo toBo(EmployeePo po, Connection connection) throws SQLException {
 		EmployeeBo bo = new EmployeeBo(po, connection);
-		bo.setStateName(CacheUtil.getDictionaryName(po.getState(), "EMPLOYEE_STATE", connection));
-		bo.setCreaterUsername(CacheUtil.getUsername(po.getCreater(), connection));
-		bo.setEditerUsername(CacheUtil.getUsername(po.getEditer(), connection));
 		bo.setDepartmentBo(new DepartmentTransformImpl().toBo(new DepartmentDaoImpl().query(po.getDepartmentId(), connection), connection));
 		return bo;
 	}

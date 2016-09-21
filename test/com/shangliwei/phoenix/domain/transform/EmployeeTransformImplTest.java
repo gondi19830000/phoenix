@@ -1,6 +1,7 @@
 package com.shangliwei.phoenix.domain.transform;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +15,7 @@ import com.shangliwei.phoenix.util.SequenceUtil;
 public class EmployeeTransformImplTest {
 
 	private EmployeePo po;
-	private ITransform<EmployeePo> transform;
+	private IEmployeeTransform transform;
 	private Connection connection;
 	
 	@Before
@@ -34,10 +35,11 @@ public class EmployeeTransformImplTest {
 
 	@After
 	public void tearDown() throws Exception {
+		DBUtil.release(connection);
 	}
 
 	@Test
-	public void testToBo() {
+	public void testToBo() throws SQLException {
 		System.out.println(transform.toBo(po, connection));
 	}
 
