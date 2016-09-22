@@ -58,7 +58,7 @@ public class EmployeeServiceImplTest {
 
 	@Test
 	public void testQueryPop() throws ClassNotFoundException, SQLException {
-		System.out.println(service.queryList(null, null));
+		System.out.println(service.queryPop(null, null));
 	}
 
 }

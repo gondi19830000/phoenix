@@ -122,11 +122,17 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<EmployeePopVo> popList = null;
 		try {
 			connection = DBUtil.getConnection();
-			List<EmployeePo> poList = dao.query(condition, pagination.getBeginRow(), pagination.getEndRow(), connection);
+			int beginRow = 0;
+			int endRow = 0;
+			if (pagination != null) {
+				beginRow = pagination.getBeginRow();
+				endRow = pagination.getEndRow();
+			}
+			List<EmployeePo> poList = dao.query(condition, beginRow, endRow, connection);
 			if (poList != null) {
 				popList = new ArrayList<>();
 				for (EmployeePo po : poList) {
-					popList.add((EmployeePopVo) transform.toListVo(po, connection));
+					popList.add((EmployeePopVo) transform.toPopVo(po, connection));
 				}
 			}
 		} finally {

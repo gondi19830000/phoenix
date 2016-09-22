@@ -23,6 +23,8 @@ public final class TypeCaseUtil {
 			} else {
 				result = Double.valueOf(String.valueOf(value));
 			}
+		} else if ("java.sql.Date".equals(value.getClass().getName())) {
+			result = value;
 		} else {
 			String message = "Lack type case with oracle type:" + value.getClass().getName();
 			Logger.print(message, Logger.LEVEL_ERROR);

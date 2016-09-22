@@ -16,15 +16,27 @@ public final class DateTimeUtil {
 	}
 	
 	public static String format(Timestamp timestamp) {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(timestamp);
+		String result = "";
+		if (timestamp != null) {
+			result = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(timestamp);
+		}
+		return result;
 	}
 	
 	public static String format(Date date) {
-		return new SimpleDateFormat("yyyy-MM-dd").format(date);
+		String result = "";
+		if (date != null) {
+			result = new SimpleDateFormat("yyyy-MM-dd").format(date);
+		}
+		return result;
 	}
 	
 	public static Date parse(String date) throws ParseException {
-		return new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+		Date dateObject = null;
+		if (date != null && !"".equals(date)) {
+			dateObject = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+		}
+		return dateObject;
 	}
 	
 }

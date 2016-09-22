@@ -1,7 +1,5 @@
 package com.shangliwei.phoenix.dao;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -9,21 +7,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.shangliwei.phoenix.dao.impl.DepartmentDaoImpl;
-import com.shangliwei.phoenix.domain.po.DepartmentPo;
+import com.shangliwei.phoenix.dao.impl.DictionaryDaoImpl;
+import com.shangliwei.phoenix.domain.po.DictionaryPo;
 import com.shangliwei.phoenix.util.DBUtil;
 import com.shangliwei.phoenix.util.DateTimeUtil;
 import com.shangliwei.phoenix.util.SequenceUtil;
 
-public class DepartmentDaoImplTest {
+public class DictionaryDaoImplTest {
 
 	private Connection connection;
-	private IDepartmentDao dao;
+	private IDictionaryDao dao;
 	
 	@Before
 	public void setUp() throws Exception {
 		connection = DBUtil.getConnection();
-		dao = new DepartmentDaoImpl();
+		dao = new DictionaryDaoImpl();
 	}
 
 	@After
@@ -33,32 +31,36 @@ public class DepartmentDaoImplTest {
 
 	@Test
 	public void testAdd() throws SQLException {
-		DepartmentPo po = new DepartmentPo();
+		DictionaryPo po = new DictionaryPo();
 		po.setId(SequenceUtil.getUUID());
-		po.setName("IT支持部本级");
-		po.setParentId("18500");
-		po.setType("01");
-		po.setState("01");
-		po.setManager("admin");
-		po.setCreateDate(DateTimeUtil.getDate());
+		po.setCode("02");
+		po.setName("离职");
+		po.setType("EMPLOYEE_STATE");
+		po.setSort(1);
+		po.setEffective("01");
+		po.setDescription("员工状态");
 		po.setCreater("admin");
 		po.setCreattime(DateTimeUtil.getTimestamp());
 		dao.add(po, connection);
 	}
 
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testUpdate() throws SQLException {
+		DictionaryPo po = dao.query("702c167ea2e74b13947865c98fd6c2ab", connection);
+		po.setEffective("02");
+		po.setEditer("admin");
+		po.setEdittime(DateTimeUtil.getTimestamp());
+		dao.update(po, connection);
 	}
 
 	@Test
 	public void testDelete() throws SQLException {
-		dao.delete("884a5aaa075b4a92aafe5f033769e365", connection);
+		dao.delete("e9bcdbd2b250432eb31e2db52e8989c0", connection);
 	}
 
 	@Test
 	public void testQueryStringConnection() throws SQLException {
-		System.out.println(dao.query("f8be43dcfce84a5ba35e478b553dae5b", connection));
+		System.out.println(dao.query("702c167ea2e74b13947865c98fd6c2ab", connection));
 	}
 
 	@Test

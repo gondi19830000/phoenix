@@ -88,8 +88,8 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IEmployeeDao {
 				parameters.add(condition.get("state"));
 			}
 			if (condition.get("departmentId") != null && !"".equals(condition.get("departmentId"))) {
-				sql.append("AND DEPARTMENT_ID LIKE ? ");
-				parameters.add("%" + condition.get("departmentId") + "%");
+				sql.append("AND DEPARTMENT_ID=? ");
+				parameters.add(condition.get("departmentId"));
 			}
 			if (beginRow>0 && endRow>0) {
 				sql.append("ROWNUM BETWEEN ? AND ? ");

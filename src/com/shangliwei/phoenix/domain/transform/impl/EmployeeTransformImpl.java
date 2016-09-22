@@ -11,6 +11,7 @@ import com.shangliwei.phoenix.domain.vo.EmployeeDetailVo;
 import com.shangliwei.phoenix.domain.vo.EmployeeListVo;
 import com.shangliwei.phoenix.domain.vo.EmployeePopVo;
 import com.shangliwei.phoenix.util.CacheUtil;
+import com.shangliwei.phoenix.util.DateTimeUtil;
 
 public class EmployeeTransformImpl implements IEmployeeTransform {
 
@@ -36,6 +37,10 @@ public class EmployeeTransformImpl implements IEmployeeTransform {
 		vo.setEditer(po.getEditer());
 		vo.setStateName(CacheUtil.getDictionaryName(po.getState(), "EMPLOYEE_STATE", connection));
 		vo.setDepartmentName(CacheUtil.getDepartmentName(po.getDepartmentId(), connection));
+		vo.setCreaterUsername(CacheUtil.getUsername(po.getCreater(), connection));
+		vo.setEditerUsername(CacheUtil.getUsername(po.getEditer(), connection));
+		vo.setCreattimeCN(DateTimeUtil.format(po.getCreattime()));
+		vo.setEdittimeCN(DateTimeUtil.format(po.getEdittime()));
 		return vo;
 	}
 
