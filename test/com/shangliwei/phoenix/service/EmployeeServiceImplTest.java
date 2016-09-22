@@ -2,6 +2,7 @@ package com.shangliwei.phoenix.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import org.junit.Test;
 
@@ -9,15 +10,16 @@ import com.shangliwei.phoenix.dao.impl.EmployeeDaoImpl;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.domain.transform.impl.EmployeeTransformImpl;
 import com.shangliwei.phoenix.domain.vo.EmployeeDetailVo;
+import com.shangliwei.phoenix.proxy.ServiceProxy;
 import com.shangliwei.phoenix.service.impl.EmployeeServiceImpl;
 import com.shangliwei.phoenix.util.DBUtil;
 
 public class EmployeeServiceImplTest {
 
-	private IEmployeeService service = new EmployeeServiceImpl();
+	private IEmployeeService service = (IEmployeeService) new ServiceProxy().bind(new EmployeeServiceImpl());
 	
 	@Test
-	public void testAdd() throws ClassNotFoundException, SQLException {
+	public void testAdd() throws ClassNotFoundException, SQLException, ParseException {
 		EmployeeDetailVo vo = new EmployeeDetailVo();
 		vo.setUsername("shangliwei1");
 		vo.setPassword("123456");
@@ -28,11 +30,11 @@ public class EmployeeServiceImplTest {
 	}
 
 	@Test
-	public void testUpdate() throws ClassNotFoundException, SQLException {
+	public void testUpdate() throws ClassNotFoundException, SQLException, ParseException {
 		Connection connection = null;
 		try {
 			connection = DBUtil.getConnection();
-			EmployeePo po = new EmployeeDaoImpl().query("11165853ca46440bbb7ddf8584e30376", connection);
+			EmployeePo po = new EmployeeDaoImpl().query("cbf2e270332c4c579ae97d18f2e317a6", connection);
 			EmployeeDetailVo vo = new EmployeeTransformImpl().toDetailVo(po, connection);
 			vo.setState("02");
 			service.update(vo, "admin");
@@ -43,7 +45,7 @@ public class EmployeeServiceImplTest {
 
 	@Test
 	public void testDelete() throws ClassNotFoundException, SQLException {
-		service.delete("93adf84a55d24c368fca2a4bbb40ef3b", "admin");
+		service.delete("cbf2e270332c4c579ae97d18f2e317a6", "admin");
 	}
 
 	@Test

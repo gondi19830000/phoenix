@@ -46,8 +46,8 @@ public class DepartmentDaoImpl extends JDBCTemplate implements IDepartmentDao {
 		parameters.add(po.getCreateDate());
 		parameters.add(po.getCloseDate());
 		parameters.add(po.getDescription());
-		parameters.add(po.getCreater());
-		parameters.add(po.getCreattime());
+		parameters.add(po.getEditer());
+		parameters.add(po.getEdittime());
 		parameters.add(po.getId());
 		this.executeUpdate(sql, parameters, connection);
 	}

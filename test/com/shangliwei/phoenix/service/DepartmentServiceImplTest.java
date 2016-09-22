@@ -1,20 +1,20 @@
 package com.shangliwei.phoenix.service;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import org.junit.Test;
 
 import com.shangliwei.phoenix.domain.vo.DepartmentDetailVo;
+import com.shangliwei.phoenix.proxy.ServiceProxy;
 import com.shangliwei.phoenix.service.impl.DepartmentServiceImpl;
 
 public class DepartmentServiceImplTest {
 
-	private IDepartmentService service = new DepartmentServiceImpl();
+	private IDepartmentService service = (IDepartmentService) new ServiceProxy().bind(new DepartmentServiceImpl());//new DepartmentServiceImpl();
 	
 	@Test
-	public void testAdd() throws ClassNotFoundException, SQLException {
+	public void testAdd() throws ClassNotFoundException, SQLException, ParseException {
 		DepartmentDetailVo vo = new DepartmentDetailVo();
 		vo.setName("IT支持部开发组");
 		vo.setParentId("18500");
@@ -26,8 +26,11 @@ public class DepartmentServiceImplTest {
 	}
 
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testUpdate() throws ClassNotFoundException, SQLException, ParseException {
+		DepartmentDetailVo vo = service.queryDetail("72224d499da04755b0504e3b26da1fd7");
+		vo.setState("02");
+		vo.setCloseDateCN("2016-09-22");
+		service.update(vo, "admin");
 	}
 
 	@Test

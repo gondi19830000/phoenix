@@ -14,7 +14,6 @@ import com.shangliwei.phoenix.domain.transform.impl.DictionaryTransformImpl;
 import com.shangliwei.phoenix.domain.vo.DictionaryDetailVo;
 import com.shangliwei.phoenix.domain.vo.DictionaryListVo;
 import com.shangliwei.phoenix.service.IDictionaryService;
-import com.shangliwei.phoenix.util.DBUtil;
 import com.shangliwei.phoenix.util.DateTimeUtil;
 import com.shangliwei.phoenix.util.Logger;
 import com.shangliwei.phoenix.util.Pagination;
@@ -28,67 +27,45 @@ public class DictionaryServiceImpl implements IDictionaryService {
 	
 	@Override
 	public void add(DictionaryDetailVo vo, String currendEmployeeId) throws ClassNotFoundException, SQLException {
-		try {
-			connection = DBUtil.getConnection();
-			DictionaryPo po = new DictionaryPo();
-			po.setId(SequenceUtil.getUUID());
-			po.setCode(vo.getCode());
-			po.setName(vo.getName());
-			po.setType(vo.getType());
-			po.setSort(Integer.valueOf(vo.getSort()));
-			po.setEffective(vo.getEffective());
-			po.setDescription(vo.getDescription());
-			po.setCreater(currendEmployeeId);
-			po.setCreattime(DateTimeUtil.getTimestamp());
-			dao.add(po, connection);
-		} finally {
-			DBUtil.release(connection);
-		}
+		DictionaryPo po = new DictionaryPo();
+		po.setId(SequenceUtil.getUUID());
+		po.setCode(vo.getCode());
+		po.setName(vo.getName());
+		po.setType(vo.getType());
+		po.setSort(Integer.valueOf(vo.getSort()));
+		po.setEffective(vo.getEffective());
+		po.setDescription(vo.getDescription());
+		po.setCreater(currendEmployeeId);
+		po.setCreattime(DateTimeUtil.getTimestamp());
+		dao.add(po, connection);
 	}
 
 	@Override
 	public void update(DictionaryDetailVo vo, String currendEmployeeId) throws ClassNotFoundException, SQLException {
-		try {
-			connection = DBUtil.getConnection();
-			DictionaryPo po = new DictionaryPo();
-			po.setId(vo.getId());
-			po.setCode(vo.getCode());
-			po.setName(vo.getName());
-			po.setType(vo.getType());
-			po.setSort(Integer.valueOf(vo.getSort()));
-			po.setEffective(vo.getEffective());
-			po.setDescription(vo.getDescription());
-			po.setEditer(currendEmployeeId);
-			po.setEdittime(DateTimeUtil.getTimestamp());
-			dao.update(po, connection);
-		} finally {
-			DBUtil.release(connection);
-		}
-
+		DictionaryPo po = new DictionaryPo();
+		po.setId(vo.getId());
+		po.setCode(vo.getCode());
+		po.setName(vo.getName());
+		po.setType(vo.getType());
+		po.setSort(Integer.valueOf(vo.getSort()));
+		po.setEffective(vo.getEffective());
+		po.setDescription(vo.getDescription());
+		po.setEditer(currendEmployeeId);
+		po.setEdittime(DateTimeUtil.getTimestamp());
+		dao.update(po, connection);
 	}
 
 	@Override
 	public void delete(String id, String currendEmployeeId) throws ClassNotFoundException, SQLException {
-		try {
-			connection = DBUtil.getConnection();
-			dao.delete(id, connection);
-		} finally {
-			DBUtil.release(connection);
-		}
-
+		dao.delete(id, connection);
 	}
 
 	@Override
 	public DictionaryDetailVo queryDetail(String id) throws ClassNotFoundException, SQLException {
 		DictionaryDetailVo vo = null;
-		try {
-			connection = DBUtil.getConnection();
-			DictionaryPo po = dao.query(id, connection);
-			if (po != null) {
-				vo = (DictionaryDetailVo) transform.toDetailVo(po, connection);
-			}
-		} finally {
-			DBUtil.release(connection);
+		DictionaryPo po = dao.query(id, connection);
+		if (po != null) {
+			vo = (DictionaryDetailVo) transform.toDetailVo(po, connection);
 		}
 		return vo;
 	}
@@ -96,17 +73,12 @@ public class DictionaryServiceImpl implements IDictionaryService {
 	@Override
 	public List<DictionaryListVo> queryList(Map<String, Object> condition, Pagination pagination) throws ClassNotFoundException, SQLException {
 		List<DictionaryListVo> voList = null;
-		try {
-			connection = DBUtil.getConnection();
-			List<DictionaryPo> poList = dao.query(condition, pagination, connection);
-			if (poList != null && !"".equals(poList)) {
-				voList = new ArrayList<>();
-				for (DictionaryPo po : poList) {
-					voList.add((DictionaryListVo) transform.toListVo(po, connection));
-				}
+		List<DictionaryPo> poList = dao.query(condition, pagination, connection);
+		if (poList != null && !"".equals(poList)) {
+			voList = new ArrayList<>();
+			for (DictionaryPo po : poList) {
+				voList.add((DictionaryListVo) transform.toListVo(po, connection));
 			}
-		} finally {
-			DBUtil.release(connection);
 		}
 		return voList;
 	}

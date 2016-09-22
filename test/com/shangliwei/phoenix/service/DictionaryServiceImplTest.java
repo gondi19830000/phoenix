@@ -1,18 +1,20 @@
 package com.shangliwei.phoenix.service;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import org.junit.Test;
 
 import com.shangliwei.phoenix.domain.vo.DictionaryDetailVo;
+import com.shangliwei.phoenix.proxy.ServiceProxy;
 import com.shangliwei.phoenix.service.impl.DictionaryServiceImpl;
 
 public class DictionaryServiceImplTest {
 
-	private IDictionaryService service = new DictionaryServiceImpl();
+	private IDictionaryService service = (IDictionaryService) new ServiceProxy().bind(new DictionaryServiceImpl());
 
 	@Test
-	public void testAdd() throws ClassNotFoundException, SQLException {
+	public void testAdd() throws ClassNotFoundException, SQLException, ParseException {
 		DictionaryDetailVo vo = new DictionaryDetailVo();
 		vo.setCode("01");
 		vo.setName("有效");
@@ -24,7 +26,7 @@ public class DictionaryServiceImplTest {
 	}
 
 	@Test
-	public void testUpdate() throws ClassNotFoundException, SQLException {
+	public void testUpdate() throws ClassNotFoundException, SQLException, ParseException {
 		DictionaryDetailVo vo = service.queryDetail("702c167ea2e74b13947865c98fd6c2ab");
 		vo.setEffective("02");
 		service.update(vo, "admin");
