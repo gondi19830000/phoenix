@@ -63,7 +63,7 @@ public class DepartmentDaoImplTest {
 
 	@Test
 	public void testQueryMapOfStringObjectIntIntConnection() throws SQLException {
-		System.out.println(dao.query(null, 0, 0, connection));
+		System.out.println(dao.query(null, null, connection));
 	}
 
 }

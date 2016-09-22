@@ -12,6 +12,7 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IDepartmentDao;
 import com.shangliwei.phoenix.domain.po.DepartmentPo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
+import com.shangliwei.phoenix.util.Pagination;
 
 public class DepartmentDaoImpl extends JDBCTemplate implements IDepartmentDao {
 
@@ -70,7 +71,7 @@ public class DepartmentDaoImpl extends JDBCTemplate implements IDepartmentDao {
 	}
 
 	@Override
-	public List<DepartmentPo> query(Map<String, Object> condition, int beginRow, int endRow, Connection connection) throws SQLException {
+	public List<DepartmentPo> query(Map<String, Object> condition, Pagination pagination, Connection connection) throws SQLException {
 		List<DepartmentPo> poList = null;
 		StringBuffer sql = new StringBuffer();
 		List<Object> parameters = new ArrayList<>();
@@ -96,10 +97,10 @@ public class DepartmentDaoImpl extends JDBCTemplate implements IDepartmentDao {
 				sql.append("AND STATE=? ");
 				parameters.add(condition.get("state"));
 			}
-			if (beginRow>0 && endRow>0) {
+			if (pagination != null) {
 				sql.append("ROWNUM BETWEEN ? AND ? ");
-				parameters.add(beginRow);
-				parameters.add(endRow);
+				parameters.add(pagination.getBeginRow());
+				parameters.add(pagination.getEndRow());
 			}
 		}
 		List<Map<String, Object>> resultList = this.executeList(sql.toString(), parameters, connection);

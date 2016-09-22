@@ -98,13 +98,7 @@ public class DictionaryServiceImpl implements IDictionaryService {
 		List<DictionaryListVo> voList = null;
 		try {
 			connection = DBUtil.getConnection();
-			int beginRow = 0;
-			int endRow = 0;
-			if (pagination != null) {
-				beginRow = pagination.getBeginRow();
-				endRow = pagination.getEndRow();
-			}
-			List<DictionaryPo> poList = dao.query(condition, beginRow, endRow, connection);
+			List<DictionaryPo> poList = dao.query(condition, pagination, connection);
 			if (poList != null && !"".equals(poList)) {
 				voList = new ArrayList<>();
 				for (DictionaryPo po : poList) {

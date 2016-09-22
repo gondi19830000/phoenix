@@ -98,13 +98,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		List<DepartmentListVo> voList = null;
 		try {
 			connection = DBUtil.getConnection();
-			int beginRow = 0;
-			int endRow = 0;
-			if (pagination != null) {
-				beginRow = pagination.getBeginRow();
-				endRow = pagination.getEndRow();
-			}
-			List<DepartmentPo> poList = dao.query(condition, beginRow, endRow, connection);
+			List<DepartmentPo> poList = dao.query(condition, pagination, connection);
 			if (poList != null) {
 				voList = new ArrayList<>();
 				for (DepartmentPo po : poList) {
@@ -122,13 +116,7 @@ public class DepartmentServiceImpl implements IDepartmentService {
 		List<DepartmentPopVo> popList = null;
 		try {
 			connection = DBUtil.getConnection();
-			int beginRow = 0;
-			int endRow = 0;
-			if (pagination != null) {
-				beginRow = pagination.getBeginRow();
-				endRow = pagination.getEndRow();
-			}
-			List<DepartmentPo> poList = dao.query(condition, beginRow, endRow, connection);
+			List<DepartmentPo> poList = dao.query(condition, pagination, connection);
 			if (poList != null) {
 				popList = new ArrayList<>();
 				for (DepartmentPo po : poList) {

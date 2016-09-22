@@ -11,6 +11,7 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IDictionaryDao;
 import com.shangliwei.phoenix.domain.po.DictionaryPo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
+import com.shangliwei.phoenix.util.Pagination;
 
 public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 
@@ -64,7 +65,7 @@ public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 	}
 
 	@Override
-	public List<DictionaryPo> query(Map<String, Object> condition, int beginRow, int endRow, Connection connection) throws SQLException {
+	public List<DictionaryPo> query(Map<String, Object> condition, Pagination pagination, Connection connection) throws SQLException {
 		List<DictionaryPo> poList = null;
 		StringBuffer sql = new StringBuffer();
 		List<Object> parameters = new ArrayList<>();
@@ -86,10 +87,10 @@ public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 				sql.append("AND DESCRIPTION like ? ");
 				parameters.add("%" + condition.get("description") + "%");
 			}
-			if (beginRow>0 && endRow>0) {
+			if (pagination != null) {
 				sql.append("ROWNUM BETWEEN ? AND ? ");
-				parameters.add(beginRow);
-				parameters.add(endRow);
+				parameters.add(pagination.getBeginRow());
+				parameters.add(pagination.getEndRow());
 			}
 		}
 		List<Map<String, Object>> resultList = this.executeList(sql.toString(), parameters, connection);

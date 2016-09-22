@@ -70,7 +70,7 @@ public class EmployeeDaoImplTest {
 	public void testQueryMapOfStringObjectIntIntConnection() throws SQLException {
 		Map<String, Object> condition = new HashMap<>();
 		condition.put("username", "shangliwei");
-		System.out.println(dao.query(condition, 0, 0, connection));
+		System.out.println(dao.query(condition, null, connection));
 	}
 	
 	@Test

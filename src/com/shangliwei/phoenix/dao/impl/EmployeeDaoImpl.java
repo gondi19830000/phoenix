@@ -11,6 +11,7 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IEmployeeDao;
 import com.shangliwei.phoenix.domain.po.EmployeePo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
+import com.shangliwei.phoenix.util.Pagination;
 
 public class EmployeeDaoImpl extends JDBCTemplate implements IEmployeeDao {
 
@@ -65,7 +66,7 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IEmployeeDao {
 	}
 
 	@Override
-	public List<EmployeePo> query(Map<String, Object> condition, int beginRow, int endRow, Connection connection) throws SQLException {
+	public List<EmployeePo> query(Map<String, Object> condition, Pagination pagination, Connection connection) throws SQLException {
 		List<EmployeePo> poList = null;
 		StringBuffer sql = new StringBuffer();
 		List<Object> parameters = new ArrayList<>();
@@ -91,10 +92,10 @@ public class EmployeeDaoImpl extends JDBCTemplate implements IEmployeeDao {
 				sql.append("AND DEPARTMENT_ID=? ");
 				parameters.add(condition.get("departmentId"));
 			}
-			if (beginRow>0 && endRow>0) {
+			if (pagination != null) {
 				sql.append("ROWNUM BETWEEN ? AND ? ");
-				parameters.add(beginRow);
-				parameters.add(endRow);
+				parameters.add(pagination.getBeginRow());
+				parameters.add(pagination.getEndRow());
 			}
 		}
 		List<Map<String, Object>> resultList = this.executeList(sql.toString(), parameters, connection);
