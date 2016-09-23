@@ -27,7 +27,7 @@ public final class TypeCaseUtil {
 			result = value;
 		} else {
 			String message = "Lack type case with oracle type:" + value.getClass().getName();
-			Logger.print(message, Logger.LEVEL_ERROR);
+			LogUtil.print(message, LogUtil.LEVEL_ERROR);
 			throw new RuntimeException(message);
 		}
 		return result;

@@ -11,7 +11,7 @@ import com.shangliwei.phoenix.constant.DBConstant;
 public final class DBUtil {
 
 	public static Connection getConnection(boolean autoCommit) throws SQLException, ClassNotFoundException {
-		Logger.print("Get Connection...auto commit:" + autoCommit, Logger.LEVEL_DEBUG);
+		LogUtil.print("Get Connection...auto commit:" + autoCommit, LogUtil.LEVEL_DEBUG);
 		Class.forName(DBConstant.DB_ORACLE_DRIVER);
 		Connection connection = DriverManager.getConnection(DBConstant.DB_URL, DBConstant.DB_USER, DBConstant.DB_PASSWORD);
 		connection.setAutoCommit(autoCommit);
@@ -20,14 +20,14 @@ public final class DBUtil {
 	
 	public static void release(Connection connection) throws SQLException {
 		if (connection != null) {
-			Logger.print("Release Connection...", Logger.LEVEL_DEBUG);
+			LogUtil.print("Release Connection...", LogUtil.LEVEL_DEBUG);
 			connection.close();
 		}
 	}
 	
 	public static void release(PreparedStatement preparedStatement) throws SQLException {
 		if (preparedStatement != null) {
-			Logger.print("Release PreparedStatement...", Logger.LEVEL_DEBUG);
+			LogUtil.print("Release PreparedStatement...", LogUtil.LEVEL_DEBUG);
 			preparedStatement.close();
 		}
 		
@@ -36,14 +36,14 @@ public final class DBUtil {
 	public static void release(PreparedStatement preparedStatement, ResultSet resultSet) throws SQLException {
 		DBUtil.release(preparedStatement);
 		if (resultSet != null) {
-			Logger.print("Release ResultSet...", Logger.LEVEL_DEBUG);
+			LogUtil.print("Release ResultSet...", LogUtil.LEVEL_DEBUG);
 			resultSet.close();
 		}
 	}
 	
 	public static void commitConnection(Connection connection) throws SQLException {
 		if (connection != null) {
-			Logger.print("Commit Connection...", Logger.LEVEL_DEBUG);
+			LogUtil.print("Commit Connection...", LogUtil.LEVEL_DEBUG);
 			connection.commit();
 		}
 	}

@@ -34,7 +34,7 @@ public abstract class JDBCTemplate {
 				result = resultList.get(0);
 			} else {
 				String message = "ExecuteOne Return multiple rows!";
-				Logger.print(message, Logger.LEVEL_ERROR);
+				LogUtil.print(message, LogUtil.LEVEL_ERROR);
 				throw new RuntimeException(message);
 			}
 		}
@@ -89,10 +89,10 @@ public abstract class JDBCTemplate {
 	}
 	
 	private void loggerSQLAndParametersMessage(String sql, List<Object> parameters) {
-		Logger.print("Execute SQL:" + sql, Logger.LEVEL_DEBUG);
+		LogUtil.print("Execute SQL:" + sql, LogUtil.LEVEL_DEBUG);
 		String parametersMessage = this.getParametersMessage(parameters);
 		if (parametersMessage != null && !"".equals(parametersMessage)) {
-			Logger.print("Execute Parameters:" + parametersMessage, Logger.LEVEL_DEBUG);
+			LogUtil.print("Execute Parameters:" + parametersMessage, LogUtil.LEVEL_DEBUG);
 		}
 	}
 }

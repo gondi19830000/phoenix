@@ -11,7 +11,7 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IDictionaryDao;
 import com.shangliwei.phoenix.domain.po.DictionaryPo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
-import com.shangliwei.phoenix.util.Logger;
+import com.shangliwei.phoenix.util.LogUtil;
 import com.shangliwei.phoenix.util.Pagination;
 
 public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
@@ -64,7 +64,7 @@ public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 		}
 		return po;*/
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		Logger.print(message, Logger.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR);
 		throw new RuntimeException(message);
 	}
 

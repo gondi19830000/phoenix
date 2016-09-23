@@ -15,7 +15,7 @@ import com.shangliwei.phoenix.domain.vo.DictionaryDetailVo;
 import com.shangliwei.phoenix.domain.vo.DictionaryListVo;
 import com.shangliwei.phoenix.service.IDictionaryService;
 import com.shangliwei.phoenix.util.DateTimeUtil;
-import com.shangliwei.phoenix.util.Logger;
+import com.shangliwei.phoenix.util.LogUtil;
 import com.shangliwei.phoenix.util.Pagination;
 import com.shangliwei.phoenix.util.SequenceUtil;
 
@@ -86,7 +86,7 @@ public class DictionaryServiceImpl implements IDictionaryService {
 	@Override
 	public List<DictionaryPo> queryPop(Map<String, Object> condition, Pagination pagination) throws ClassNotFoundException, SQLException {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		Logger.print(message, Logger.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR);
 		throw new RuntimeException(message);
 	}
 

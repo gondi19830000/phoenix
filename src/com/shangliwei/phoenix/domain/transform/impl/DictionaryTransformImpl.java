@@ -9,14 +9,14 @@ import com.shangliwei.phoenix.domain.vo.DictionaryDetailVo;
 import com.shangliwei.phoenix.domain.vo.DictionaryListVo;
 import com.shangliwei.phoenix.util.CacheUtil;
 import com.shangliwei.phoenix.util.DateTimeUtil;
-import com.shangliwei.phoenix.util.Logger;
+import com.shangliwei.phoenix.util.LogUtil;
 
 public class DictionaryTransformImpl implements IDictionaryTransform {
 
 	@Override
 	public Object toBo(DictionaryPo po, Connection connection) throws SQLException {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		Logger.print(message, Logger.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR);
 		throw new RuntimeException(message);
 	}
 
@@ -56,7 +56,7 @@ public class DictionaryTransformImpl implements IDictionaryTransform {
 	@Override
 	public Object toPopVo(DictionaryPo po, Connection connection) {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		Logger.print(message, Logger.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR);
 		throw new RuntimeException(message);
 	}
 
