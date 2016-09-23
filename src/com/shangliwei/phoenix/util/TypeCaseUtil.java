@@ -3,6 +3,8 @@ package com.shangliwei.phoenix.util;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
+import com.shangliwei.phoenix.constant.LogConstant;
+
 import oracle.sql.TIMESTAMP;
 
 public final class TypeCaseUtil {
@@ -27,7 +29,7 @@ public final class TypeCaseUtil {
 			result = value;
 		} else {
 			String message = "Lack type case with oracle type:" + value.getClass().getName();
-			LogUtil.print(message, LogUtil.LEVEL_ERROR);
+			LogUtil.print(message, LogUtil.LEVEL_ERROR, LogConstant.DEVELOP_MODE);
 			throw new RuntimeException(message);
 		}
 		return result;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.shangliwei.phoenix.constant.LogConstant;
 import com.shangliwei.phoenix.dao.IDictionaryDao;
 import com.shangliwei.phoenix.dao.impl.DictionaryDaoImpl;
 import com.shangliwei.phoenix.domain.po.DictionaryPo;
@@ -86,7 +87,7 @@ public class DictionaryServiceImpl implements IDictionaryService {
 	@Override
 	public List<DictionaryPo> queryPop(Map<String, Object> condition, Pagination pagination) throws ClassNotFoundException, SQLException {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		LogUtil.print(message, LogUtil.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR, LogConstant.DEVELOP_MODE);
 		throw new RuntimeException(message);
 	}
 

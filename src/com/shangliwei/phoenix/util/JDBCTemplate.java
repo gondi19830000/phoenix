@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.shangliwei.phoenix.constant.LogConstant;
+
 public abstract class JDBCTemplate {
 
 	protected void executeUpdate(String sql, List<Object> parameters, Connection connection) throws SQLException {
@@ -34,7 +36,7 @@ public abstract class JDBCTemplate {
 				result = resultList.get(0);
 			} else {
 				String message = "ExecuteOne Return multiple rows!";
-				LogUtil.print(message, LogUtil.LEVEL_ERROR);
+				LogUtil.print(message, LogUtil.LEVEL_ERROR, LogConstant.DEVELOP_MODE);
 				throw new RuntimeException(message);
 			}
 		}
@@ -89,10 +91,10 @@ public abstract class JDBCTemplate {
 	}
 	
 	private void loggerSQLAndParametersMessage(String sql, List<Object> parameters) {
-		LogUtil.print("Execute SQL:" + sql, LogUtil.LEVEL_DEBUG);
+		LogUtil.print("Execute SQL:" + sql, LogUtil.LEVEL_DEBUG, LogConstant.DEVELOP_MODE);
 		String parametersMessage = this.getParametersMessage(parameters);
 		if (parametersMessage != null && !"".equals(parametersMessage)) {
-			LogUtil.print("Execute Parameters:" + parametersMessage, LogUtil.LEVEL_DEBUG);
+			LogUtil.print("Execute Parameters:" + parametersMessage, LogUtil.LEVEL_DEBUG, LogConstant.DEVELOP_MODE);
 		}
 	}
 }

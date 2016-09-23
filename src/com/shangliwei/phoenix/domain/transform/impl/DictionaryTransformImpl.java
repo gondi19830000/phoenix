@@ -3,6 +3,7 @@ package com.shangliwei.phoenix.domain.transform.impl;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.shangliwei.phoenix.constant.LogConstant;
 import com.shangliwei.phoenix.domain.po.DictionaryPo;
 import com.shangliwei.phoenix.domain.transform.IDictionaryTransform;
 import com.shangliwei.phoenix.domain.vo.DictionaryDetailVo;
@@ -16,7 +17,7 @@ public class DictionaryTransformImpl implements IDictionaryTransform {
 	@Override
 	public Object toBo(DictionaryPo po, Connection connection) throws SQLException {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		LogUtil.print(message, LogUtil.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR, LogConstant.DEVELOP_MODE);
 		throw new RuntimeException(message);
 	}
 
@@ -56,7 +57,7 @@ public class DictionaryTransformImpl implements IDictionaryTransform {
 	@Override
 	public Object toPopVo(DictionaryPo po, Connection connection) {
 		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
-		LogUtil.print(message, LogUtil.LEVEL_ERROR);
+		LogUtil.print(message, LogUtil.LEVEL_ERROR, LogConstant.DEVELOP_MODE);
 		throw new RuntimeException(message);
 	}
 
