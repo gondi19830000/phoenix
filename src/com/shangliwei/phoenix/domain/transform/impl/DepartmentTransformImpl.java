@@ -23,7 +23,7 @@ public class DepartmentTransformImpl implements IDepartmentTransform {
 	}
 
 	@Override
-	public DepartmentDetailVo toDetailVo(DepartmentPo po, Connection connection) {
+	public DepartmentDetailVo toDetailVo(DepartmentPo po, Connection connection) throws SQLException {
 		DepartmentDetailVo vo = new DepartmentDetailVo();
 		vo.setId(po.getId());
 		vo.setName(po.getName());
@@ -48,7 +48,7 @@ public class DepartmentTransformImpl implements IDepartmentTransform {
 	}
 
 	@Override
-	public DepartmentListVo toListVo(DepartmentPo po, Connection connection) {
+	public DepartmentListVo toListVo(DepartmentPo po, Connection connection) throws SQLException {
 		DepartmentListVo vo = new DepartmentListVo();
 		vo.setId(po.getId());
 		vo.setName(po.getName());
@@ -62,7 +62,7 @@ public class DepartmentTransformImpl implements IDepartmentTransform {
 	}
 
 	@Override
-	public DepartmentPopVo toPopVo(DepartmentPo po, Connection connection) {
+	public DepartmentPopVo toPopVo(DepartmentPo po, Connection connection) throws SQLException {
 		DepartmentPopVo vo = new DepartmentPopVo();
 		vo.setId(po.getId());
 		vo.setName(po.getName());

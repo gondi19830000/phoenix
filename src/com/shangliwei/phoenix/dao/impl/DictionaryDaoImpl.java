@@ -11,6 +11,7 @@ import java.util.Map;
 import com.shangliwei.phoenix.dao.IDictionaryDao;
 import com.shangliwei.phoenix.domain.po.DictionaryPo;
 import com.shangliwei.phoenix.util.JDBCTemplate;
+import com.shangliwei.phoenix.util.Logger;
 import com.shangliwei.phoenix.util.Pagination;
 
 public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
@@ -55,13 +56,16 @@ public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 
 	@Override
 	public DictionaryPo query(String id, Connection connection) throws SQLException {
-		DictionaryPo po = null;
+		/*DictionaryPo po = null;
 		String sql = "SELECT * FROM S_T_DICTIONARY WHERE ID=?";
 		Map<String, Object> result = this.executeOne(sql, Arrays.asList(id), connection);
 		if (result != null) {
 			po = this.toPo(result);
 		}
-		return po;
+		return po;*/
+		String message = "Un imploment interface method:" + Thread.currentThread().getStackTrace()[1].getClassName() + "." + Thread.currentThread().getStackTrace()[1].getMethodName();
+		Logger.print(message, Logger.LEVEL_ERROR);
+		throw new RuntimeException(message);
 	}
 
 	@Override
@@ -116,6 +120,17 @@ public class DictionaryDaoImpl extends JDBCTemplate implements IDictionaryDao {
 		po.setCreattime((Timestamp) result.get("CREATTIME"));
 		po.setEditer((String) result.get("EDITER"));
 		po.setEdittime((Timestamp) result.get("EDITTIME"));
+		return po;
+	}
+
+	@Override
+	public DictionaryPo query(String code, String type, Connection connection) throws SQLException {
+		DictionaryPo po = null;
+		String sql = "SELECT * FROM S_T_DICTIONARY WHERE CODE=? AND TYPE=?";
+		Map<String, Object> result = this.executeOne(sql, Arrays.asList(code, type), connection);
+		if (result != null) {
+			po = this.toPo(result);
+		}
 		return po;
 	}
 

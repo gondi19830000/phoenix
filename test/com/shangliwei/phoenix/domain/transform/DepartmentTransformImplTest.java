@@ -1,7 +1,5 @@
 package com.shangliwei.phoenix.domain.transform;
 
-import static org.junit.Assert.*;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -51,18 +49,18 @@ public class DepartmentTransformImplTest {
 	}
 
 	@Test
-	public void testToDetailVo() {
-		fail("Not yet implemented");
+	public void testToDetailVo() throws SQLException {
+		System.out.println(transform.toDetailVo(po, connection));
 	}
 
 	@Test
-	public void testToListVo() {
-		fail("Not yet implemented");
+	public void testToListVo() throws SQLException {
+		System.out.println(transform.toListVo(po, connection));
 	}
 
 	@Test
-	public void testToPopVo() {
-		fail("Not yet implemented");
+	public void testToPopVo() throws SQLException {
+		System.out.println(transform.toPopVo(po, connection));
 	}
 
 }

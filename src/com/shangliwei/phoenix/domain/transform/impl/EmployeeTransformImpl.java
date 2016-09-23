@@ -23,7 +23,7 @@ public class EmployeeTransformImpl implements IEmployeeTransform {
 	}
 
 	@Override
-	public EmployeeDetailVo toDetailVo(EmployeePo po, Connection connection) {
+	public EmployeeDetailVo toDetailVo(EmployeePo po, Connection connection) throws SQLException {
 		EmployeeDetailVo vo = new EmployeeDetailVo();
 		vo.setId(po.getId());
 		vo.setSequence(String.valueOf(po.getSequence()));
@@ -45,7 +45,7 @@ public class EmployeeTransformImpl implements IEmployeeTransform {
 	}
 
 	@Override
-	public EmployeeListVo toListVo(EmployeePo po, Connection connection) {
+	public EmployeeListVo toListVo(EmployeePo po, Connection connection) throws SQLException {
 		EmployeeListVo vo = new EmployeeListVo();
 		vo.setId(po.getId());
 		vo.setUsername(po.getUsername());
@@ -57,7 +57,7 @@ public class EmployeeTransformImpl implements IEmployeeTransform {
 	}
 
 	@Override
-	public EmployeePopVo toPopVo(EmployeePo po, Connection connection) {
+	public EmployeePopVo toPopVo(EmployeePo po, Connection connection) throws SQLException {
 		EmployeePopVo vo = new EmployeePopVo();
 		vo.setId(po.getId());
 		vo.setUsername(po.getUsername());

@@ -44,17 +44,17 @@ public class EmployeeTransformImplTest {
 	}
 
 	@Test
-	public void testToDetailVo() {
+	public void testToDetailVo() throws SQLException {
 		System.out.println(transform.toDetailVo(po, connection));
 	}
 
 	@Test
-	public void testToListVo() {
+	public void testToListVo() throws SQLException {
 		System.out.println(transform.toListVo(po, connection));
 	}
 
 	@Test
-	public void testToPopVo() {
+	public void testToPopVo() throws SQLException {
 		System.out.println(transform.toPopVo(po, connection));
 	}
 

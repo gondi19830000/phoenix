@@ -21,7 +21,7 @@ public class DictionaryTransformImpl implements IDictionaryTransform {
 	}
 
 	@Override
-	public Object toDetailVo(DictionaryPo po, Connection connection) {
+	public Object toDetailVo(DictionaryPo po, Connection connection) throws SQLException {
 		DictionaryDetailVo vo = new DictionaryDetailVo();
 		vo.setId(po.getId());
 		vo.setCode(po.getCode());
@@ -41,7 +41,7 @@ public class DictionaryTransformImpl implements IDictionaryTransform {
 	}
 
 	@Override
-	public Object toListVo(DictionaryPo po, Connection connection) {
+	public Object toListVo(DictionaryPo po, Connection connection) throws SQLException {
 		DictionaryListVo vo = new DictionaryListVo();
 		vo.setId(po.getId());
 		vo.setCode(po.getCode());

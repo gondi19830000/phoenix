@@ -2,6 +2,7 @@ package com.shangliwei.phoenix.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
@@ -65,7 +66,13 @@ public class DictionaryDaoImplTest {
 
 	@Test
 	public void testQueryMapOfStringObjectIntIntConnection() throws SQLException {
-		System.out.println(dao.query(null, null, connection));
+		Map<String, Object> condition = null;
+		System.out.println(dao.query(condition, null, connection));
+	}
+	
+	@Test
+	public void testQueryStringStringConnection() throws SQLException {
+		System.out.println(dao.query("01", "EMPLOYEE_STATE", connection));
 	}
 
 }
