@@ -30,7 +30,7 @@ public class EmployeeTransformImplTest {
 		po.setCreater("admin");
 //		po.setCreattime(DateTimeUtil.getTimestamp());
 		transform = new EmployeeTransformImpl();
-		connection = DBUtil.getConnection();
+		connection = DBUtil.getConnection(true);
 	}
 
 	@After

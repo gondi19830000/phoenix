@@ -33,8 +33,8 @@ public class EmployeeServiceImplTest {
 	public void testUpdate() throws ClassNotFoundException, SQLException, ParseException {
 		Connection connection = null;
 		try {
-			connection = DBUtil.getConnection();
-			EmployeePo po = new EmployeeDaoImpl().query("cbf2e270332c4c579ae97d18f2e317a6", connection);
+			connection = DBUtil.getConnection(true);
+			EmployeePo po = new EmployeeDaoImpl().query("e16ade479ddd478fbe46a74a6477d554", connection);
 			EmployeeDetailVo vo = new EmployeeTransformImpl().toDetailVo(po, connection);
 			vo.setState("02");
 			service.update(vo, "admin");

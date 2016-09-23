@@ -10,10 +10,12 @@ import com.shangliwei.phoenix.constant.DBConstant;
 
 public final class DBUtil {
 
-	public static Connection getConnection() throws SQLException, ClassNotFoundException {
-		Logger.print("Get Connection...", Logger.LEVEL_DEBUG);
+	public static Connection getConnection(boolean autoCommit) throws SQLException, ClassNotFoundException {
+		Logger.print("Get Connection...auto commit:" + autoCommit, Logger.LEVEL_DEBUG);
 		Class.forName(DBConstant.DB_ORACLE_DRIVER);
-		return DriverManager.getConnection(DBConstant.DB_URL, DBConstant.DB_USER, DBConstant.DB_PASSWORD);
+		Connection connection = DriverManager.getConnection(DBConstant.DB_URL, DBConstant.DB_USER, DBConstant.DB_PASSWORD);
+		connection.setAutoCommit(autoCommit);
+		return connection;
 	}
 	
 	public static void release(Connection connection) throws SQLException {
@@ -36,6 +38,13 @@ public final class DBUtil {
 		if (resultSet != null) {
 			Logger.print("Release ResultSet...", Logger.LEVEL_DEBUG);
 			resultSet.close();
+		}
+	}
+	
+	public static void commitConnection(Connection connection) throws SQLException {
+		if (connection != null) {
+			Logger.print("Commit Connection...", Logger.LEVEL_DEBUG);
+			connection.commit();
 		}
 	}
 }

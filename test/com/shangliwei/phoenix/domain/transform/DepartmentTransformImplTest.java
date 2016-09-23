@@ -36,7 +36,7 @@ public class DepartmentTransformImplTest {
 		po.setCreater("admin");
 		po.setCreattime(DateTimeUtil.getTimestamp());
 		transform = new DepartmentTransformImpl();
-		connection = DBUtil.getConnection();
+		connection = DBUtil.getConnection(true);
 	}
 	
 	@After

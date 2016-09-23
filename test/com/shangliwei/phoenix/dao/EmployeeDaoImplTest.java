@@ -22,7 +22,7 @@ public class EmployeeDaoImplTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		connection = DBUtil.getConnection();
+		connection = DBUtil.getConnection(true);
 		dao = new EmployeeDaoImpl();
 	}
 

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public abstract class JDBCTemplate {
 
-	public void executeUpdate(String sql, List<Object> parameters, Connection connection) throws SQLException {
+	protected void executeUpdate(String sql, List<Object> parameters, Connection connection) throws SQLException {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
@@ -26,7 +26,7 @@ public abstract class JDBCTemplate {
 		}
 	}
 	
-	public Map<String, Object> executeOne(String sql, List<Object> parameters, Connection connection) throws SQLException {
+	protected Map<String, Object> executeOne(String sql, List<Object> parameters, Connection connection) throws SQLException {
 		List<Map<String, Object>> resultList = this.executeQuery(sql, parameters, connection);
 		Map<String, Object> result = null;
 		if (resultList != null) {
@@ -41,7 +41,7 @@ public abstract class JDBCTemplate {
 		return result;
 	}
 	
-	public List<Map<String, Object>> executeList(String sql, List<Object> parameters, Connection connection) throws SQLException {
+	protected List<Map<String, Object>> executeList(String sql, List<Object> parameters, Connection connection) throws SQLException {
 		return this.executeQuery(sql, parameters, connection);
 	}
 	
