@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="../css/bootstrap-theme.min.css"> -->
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -51,7 +51,7 @@ body {
 		<table width="100%">
 			<tr align="center">
 				<td>
-					<button type="button" class="btn btn-primary">查询</button>
+					<button type="button" class="btn btn-default">查询</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default">重置</button>
 				</td>
